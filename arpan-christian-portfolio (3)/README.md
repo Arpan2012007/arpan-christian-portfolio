@@ -27,7 +27,6 @@ vanilla JavaScript (no frameworks, no Google Fonts).
 | Education | Institution names, years and coursework in the Education timeline |
 | Certificates | Certificate titles, issuers and dates |
 | Experience | Internship/training details once available |
-| Achievements | Real achievements and short descriptions |
 | Contact form | Currently front-end only (shows a confirmation message but doesn't send email). Wire it up to a service like Formspree, EmailJS, or your own backend endpoint — see the comment in `script.js` (section 7) |
 
 ## Running it
