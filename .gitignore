@@ -1,0 +1,9 @@
+# Ignore local Java SDK bundle and other generated files
+oracleJdk-26/
+node_modules/
+dist/
+*.log
+*.cache
+.vscode/**/.history
+.DS_Store
+Thumbs.db
