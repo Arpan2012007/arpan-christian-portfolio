@@ -200,11 +200,11 @@ document.addEventListener("DOMContentLoaded", () => {
     formStatus.textContent = "Sending your message...";
   });
 
-  // Show success message if redirected back
+ 
   const urlParams = new URLSearchParams(window.location.search);
   if (urlParams.get("success") === "true") {
     formStatus.style.color = "#51cf66";
-    formStatus.textContent = "Message sent successfully! I'll get back to you soon.";
+    formStatus.textContent   = "Message sent successfully! I'll get back to you soon.";
     setTimeout(() => {
       formStatus.textContent = "";
     }, 5000);

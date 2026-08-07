@@ -7,11 +7,17 @@ function App() {
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [typedText, setTypedText] = useState('')
   const [formStatus, setFormStatus] = useState('')
-
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || 'light'
+    }
+    return 'light'
+  })
+  
   const roles = [
     "Aspiring Software Developer",
     "Web Developer",
-    "SQL Enthusiast"
+    
   ]
   
   let roleIndex = 0
@@ -31,11 +37,17 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    document.documentElement.style.colorScheme = theme
+    localStorage.setItem('theme', theme)
+  }, [theme])
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" })
   }
 
- 
+
   useEffect(() => {
     const typeLoop = () => {
       const currentRole = roles[roleIndex]
@@ -96,6 +108,14 @@ function App() {
           </ul>
 
           <div className="nav-actions">
+            <button
+              className="icon-btn theme-toggle"
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+            >
+              <i className={`fa-solid ${theme === 'light' ? 'fa-moon' : 'fa-sun'}`} aria-hidden="true"></i>
+              <span>{theme === 'light' ? 'Dark' : 'Light'}</span>
+            </button>
             <button className="hamburger" onClick={() => setNavOpen(!navOpen)} aria-label="Toggle navigation menu" aria-expanded={navOpen}>
               <span></span><span></span><span></span>
             </button>
@@ -115,8 +135,8 @@ function App() {
               </p>
               <p className="hero-intro">
                 I'm a software development student who enjoys turning real-world problems into clean,
-                working code. I build with Java, JavaScript and SQL, ship practical projects end‑to‑end,
-                and I'm always looking for the next thing to learn.
+                working code. I build it with Java, JavaScript and SQL, ship practical projects end‑to‑end,
+                and I'm always looking for the more new things to learn.
               </p>
               <div className="hero-actions">
                 <a href="assets/images/resume.png" className="btn btn-primary" download="Arpan-Christian-Resume.png" target="_blank" rel="noopener noreferrer">
@@ -145,7 +165,9 @@ function App() {
               </div>
               <div className="profile-orb">
                 <div className="profile-placeholder" aria-label="Profile picture placeholder">
-                  <i className="fa-solid fa-user" aria-hidden="true"></i>
+                  <a href="/assets/images/profile-pic.jpeg" target="_blank" rel="noopener noreferrer">
+                    <img src="/assets/images/profile-pic.jpeg" alt="Arpan Christian" />
+                  </a>
                 </div>
               </div>
             </div>
@@ -467,7 +489,7 @@ function App() {
         </section>
       </main>
 
-      {/* FOOTER */}
+     
       <footer className="footer">
         <p>&copy; <span id="year">{new Date().getFullYear()}</span> Arpan Christian. All rights reserved.</p>
         <div className="footer-socials">
